@@ -1,5 +1,5 @@
-# cnext-search
-This repository is for the global searches on the careers360 website
+# weather-dashboard-backend
+This repository is for the weather related data for all the countries
 
 
 # Tech/framework used
@@ -25,12 +25,6 @@ This repository is for the global searches on the careers360 website
 
 # Code Style Tools
 - Black
-
-### Run Kafka Consumer
-
-```bash
-python3 -m backend.consumers.start_consumer
-```
 
 ### Run Tests
 Steps and code to run test
