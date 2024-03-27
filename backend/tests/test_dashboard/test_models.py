@@ -1,5 +1,5 @@
 # writing new unit test cases here
 
 
-def test_search_model():
+def test_weather_model():
     pass
