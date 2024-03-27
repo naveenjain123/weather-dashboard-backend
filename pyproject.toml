@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "cnext_search"
+version = "0.1.1"
+description = "cnext repository for search service"
+authors = ["Careers Tech Engg Team <tech@careers360.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+
+[tool.poetry.dev-dependencies]
+pytest-django = "^4.5.2"
+coverage = "^6.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
