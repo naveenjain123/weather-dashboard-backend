@@ -27,6 +27,8 @@ class Command(BaseCommand):
         any commands can be written here for any activity
 
         """
+        if options["weather_data"]:
+            pass
         chunk_size = 500
         limit = 150000
 

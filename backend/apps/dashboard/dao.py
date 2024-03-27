@@ -1,6 +1,6 @@
 import os
 
-from backend.apps.dashboard.models.search_report_model import SearchReport
+from backend.apps.dashboard.models.weather_model import WeatherHistory
 from backend.helper.logging_helper import Logger
 
 # from backend.settings.base import *
@@ -9,29 +9,24 @@ logger = Logger(__name__)
 
 class WeatherHistoryDao:
     def __init__(self, params, *args, **kwargs):
-        domain = params.get("domain", "").split(".")[0]
-        query = "SELECT  t.id,MAX(t.id),t.title,t.url, d.old_domain_name, d.id as did from trending_search t join domain d on (t.domain_id=d.id) where status='Published' {sub_query} GROUP BY t.weight;"
-        if domain:
-            domain = domain + ".careers360.com"
-            sub_query = f'AND t.domain_id in (Select id from domain where old_domain_name="{domain}")'
+        from_date = params.get("from_date")
+        to_date = params.get("to_date")
+        query = "SELECT id,wh.* from weather_history as wh  where wh.timestamp>= {} and wh.timestamp<={}".format(from_date,to_date)
+        self.query = query
 
-        else:
-            sub_query = ""
-        self.query = query.format(sub_query=sub_query)
-
-    # function to add search report
-    def fetch_popular_search_results(self):
+    # function to fetch weather history results
+    def fetch_weather_history_results(self):
         """
-        The function fetches the most popular search results from a database table called
-        "trending_search" and returns them.
-        :return: the popular search results from the database.
+        The function fetches the weather history data from a database table called
+        "weather_history" according to the dates passed.
+        :return: the weather history data from the database.
         """
         try:
-            popular_search_results = SearchReport.objects.raw(self.query)
-            return popular_search_results
+            weather_history_data = WeatherHistory.objects.raw(self.query)
+            return weather_history_data
 
         except Exception as e:
             logger.log_error(
-                "Error in fetch_popular_search_results {}".format(str(e))
+                "Error in fetch_weather_history_results {}".format(str(e))
             )
             return []

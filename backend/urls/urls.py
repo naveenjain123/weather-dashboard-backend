@@ -13,7 +13,7 @@ urlpatterns = [
     path(
         "api/<int:version>/weather-history",
         dashboard_api_views.WeatherHistoryApi.as_view(),
-        name="search.entities-search-api",
+        name="dashboard.weather-history-api",
     )
 ]
 
