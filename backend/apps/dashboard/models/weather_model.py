@@ -5,7 +5,7 @@ from django.db import models
 
 class WeatherHistory(models.Model):
     """weather history model"""
-
+    
     country = models.CharField(max_length=1000)
     temp = models.IntegerField(null=False, default=0)
     feels_like = models.IntegerField(null=False, default=0)
@@ -16,6 +16,7 @@ class WeatherHistory(models.Model):
     grnd_level = models.IntegerField(null=False, default=0)
     humidity = models.IntegerField(null=False, default=0)
     temp_kf = models.IntegerField(null=False, default=0)
+    date = models.DateField(null=False)
     timestamp = models.DateTimeField(null=False, default=timezone.now())
 
     class Meta:

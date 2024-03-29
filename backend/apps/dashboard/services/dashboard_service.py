@@ -21,16 +21,11 @@ class WeatherHistoryService:
             {
                 "id":weather_history_record.id,
                 "country":weather_history_record.country,
-                "temp":weather_history_record.temp,
-                "feels_like":weather_history_record.feels_like,
                 "temp_min":weather_history_record.temp_min,
                 "temp_max":weather_history_record.temp_max,
                 "pressure":weather_history_record.pressure,
-                "sea_level":weather_history_record.sea_level,
-                "grnd_level":weather_history_record.grnd_level,
                 "humidity":weather_history_record.humidity,
-                "temp_kf":weather_history_record.temp_kf,
-                "datetime":weather_history_record.datetime
+                "date":weather_history_record.timestamp
             }
             for weather_history_record in data
         ]

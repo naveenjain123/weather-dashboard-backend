@@ -3,15 +3,13 @@ import os
 from backend.apps.dashboard.models.weather_model import WeatherHistory
 from backend.helper.logging_helper import Logger
 
-# from backend.settings.base import *
-
 logger = Logger(__name__)
 
 class WeatherHistoryDao:
     def __init__(self, params, *args, **kwargs):
         from_date = params.get("from_date")
         to_date = params.get("to_date")
-        query = "SELECT id,wh.* from weather_history as wh  where wh.timestamp>= {} and wh.timestamp<={}".format(from_date,to_date)
+        query = "SELECT id,max(temp_max) as temp_max,min(temp_min) as temp_min,max(pressure) as pressure,max(humidity) as humidity,country from weather_history as wh  where wh.date>= {} and wh.date<={} group by wh.date,wh.id".format(from_date,to_date)
         self.query = query
 
     # function to fetch weather history results
@@ -23,6 +21,7 @@ class WeatherHistoryDao:
         """
         try:
             weather_history_data = WeatherHistory.objects.raw(self.query)
+            print(weather_history_data)
             return weather_history_data
 
         except Exception as e:

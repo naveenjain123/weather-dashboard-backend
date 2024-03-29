@@ -47,7 +47,7 @@ class ServiceCheckAPI(APIView):
         return JsonResponse(context, status=status.HTTP_200_OK)
 
 class WeatherHistoryApi(APIView):
-    permission_classes = (ApiKeyPermission,)
+    #permission_classes = (ApiKeyPermission,)
 
     def get(self, request, version, format=None):
         """
