@@ -29,5 +29,6 @@ class WeatherHistoryService:
             }
             for weather_history_record in data
         ]
-        response = {"results": weather_history_results}
+        dates = [weather_history_record.date for weather_history_record in data]
+        response = {"results": {"list":weather_history_results,"dates":dates}}
         return response
