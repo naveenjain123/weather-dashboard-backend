@@ -13,7 +13,7 @@ from backend.helper.common_helper import (
 from backend.helper.custom_permission import ApiKeyPermission
 from backend.helper.logging_helper import Logger
 from backend.helper.redis_helper import CachedMixin
-from backend.helper.response import SuccessResponse
+from backend.helper.response import SuccessResponse,ErrorResponse
 
 logger = Logger(__name__)
 
@@ -66,6 +66,13 @@ class WeatherHistoryApi(APIView):
         :return: a SuccessResponse object with the weather_history_response as the data, a status code of
         200 (HTTP_200_OK), and direct_results set to True.
         """
+        from_date = request.query_params.get("from_date")
+        to_date = request.query_params.get("to_date")
+        if not (from_date or to_date):
+            return ErrorResponse(
+            "From date or to date is missing",
+            status=status.HTTP_400_BAD_REQUEST
+        )
         weather_history_service_obj = WeatherHistoryService(request.query_params)
         weather_history_search_response = (
             weather_history_service_obj.get_weather_history_results()

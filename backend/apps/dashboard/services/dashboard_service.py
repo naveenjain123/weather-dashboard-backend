@@ -25,7 +25,7 @@ class WeatherHistoryService:
                 "temp_max":weather_history_record.temp_max,
                 "pressure":weather_history_record.pressure,
                 "humidity":weather_history_record.humidity,
-                "date":weather_history_record.timestamp
+                "date":weather_history_record.date
             }
             for weather_history_record in data
         ]
